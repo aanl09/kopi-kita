@@ -1786,7 +1786,8 @@ body {
 }
 
 .g-sim-window {
-    width: 360px;
+    width: 92%;
+    max-width: 360px;
     background-color: #FFFFFF;
     border-radius: 8px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.25), 0 0 1px rgba(0,0,0,0.1);
@@ -2254,6 +2255,53 @@ body {
 
 /* Hide desktop elements on mobile screens */
 @media (max-width: 991px) {
+    body {
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+    }
+
+    .phone-frame {
+        height: 100%;
+        height: 100dvh;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .screen-wrapper {
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .screen {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .scroll-container {
+        padding-bottom: 120px !important;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .orders-screen {
+        padding-bottom: 120px !important;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .profile-screen {
+        padding-bottom: 120px !important;
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .auth-decor-side,
     .desktop-nav {
         display: none !important;
@@ -2264,12 +2312,8 @@ body {
         display: block;
         padding: 0;
     }
-
-    /* Normal scrolling mobile view */
-    .scroll-container {
-        padding-bottom: 110px; /* clear bottom navigation on smaller devices */
-    }
 }
+
 
 /* Adaptive mobile layout helper for small viewports */
 @media (max-width: 500px) {
@@ -2590,6 +2634,7 @@ body {
    QRIS & CASH MODALS CUSTOM STYLING
    ========================================================== */
 .qris-modal, .cash-modal {
+    width: 92% !important;
     max-width: 360px !important;
 }
 
@@ -3583,4 +3628,92 @@ body.logged-in .screen-wrapper[data-active-tab="admin"] .orders-screen {
 
 .btn-qris-download-client:active {
     transform: translateY(0);
+}
+
+/* Penyesuaian khusus untuk layar sangat kecil seperti iPhone SE (<= 350px) */
+@media (max-width: 350px) {
+    .scroll-container,
+    .orders-screen,
+    .profile-screen {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+    .dash-header {
+        margin-bottom: 16px;
+    }
+
+    .header-actions {
+        gap: 8px; /* Rapatkan tombol aksi atas */
+    }
+
+    .header-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .welcome-section h2 {
+        font-size: 20px; /* Perkecil font selamat datang */
+    }
+
+    .promo-slides {
+        height: 120px; /* Kurangi tinggi promo slider */
+    }
+
+    .promo-slide {
+        padding: 12px 16px;
+    }
+
+    .promo-title {
+        font-size: 15px;
+    }
+
+    .promo-image {
+        width: 85px;
+        height: 85px;
+    }
+
+    .products-grid {
+        gap: 10px; /* Rapatkan grid produk */
+    }
+
+    .product-card {
+        padding: 8px;
+    }
+
+    .product-img-wrapper {
+        height: 100px;
+    }
+
+    .product-name {
+        font-size: 12.5px;
+        height: 32px;
+    }
+
+    .product-price {
+        font-size: 13.5px;
+    }
+
+    /* Penyesuaian bottom nav agar sangat pas */
+    .bottom-nav {
+        left: 10px;
+        right: 10px;
+        bottom: 12px;
+        height: 64px;
+        border-radius: 18px;
+    }
+
+    .nav-item {
+        padding: 4px 6px;
+        gap: 2px;
+    }
+
+    .nav-item svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .nav-item span {
+        font-size: 9.5px;
+    }
 }
