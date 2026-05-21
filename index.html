@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kopi Kita - Premium Coffee Ordering Web App</title>
+    <!-- Meta tags for premium SEO and mobile-first experience -->
+    <meta name="description" content="Kopi Kita - Aplikasi pemesanan kopi premium dengan cita rasa terbaik. Pesan es kopi susu aren, cappuccino, boba, dan camilan nikmat lainnya langsung lewat handphone Anda.">
+    <meta name="theme-color" content="#FAF6F0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="logged-in">
+    
+    <!-- Main Smartphone Bezel Frame (For desktop previewing, collapses on mobile screens) -->
+    <div class="phone-frame">
+        
+        <!-- Top Status Bar (Wifi, Signal, Battery, Time) -->
+        <div class="phone-status-bar">
+            <span id="phone-time">12:30</span>
+            <div class="phone-island"></div>
+            <div class="phone-status-icons">
+                <!-- Signal Icon -->
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M2 22h20V2z" opacity="0.3"/>
+                    <path d="M2 22h16V6z"/>
+                </svg>
+                <!-- Wifi Icon -->
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12 21l-12-12c4.4-4.4 11.6-4.4 16 0z" opacity="0.3"/>
+                    <path d="M12 21l-9-9c3.3-3.3 8.7-3.3 12 0z"/>
+                </svg>
+                <!-- Battery Icon -->
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M17 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm1 9h-1V10h1v4zm-14 3v-10h10v10H4z"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Inside Screen Wrapper -->
+        <div class="screen-wrapper">
+
+            <!-- ==========================================
+                 SCREEN 1: HOME SCREEN (Layar Beranda - Active by default)
+                 ========================================== -->
+            <div id="screen-home" class="screen home-layout active">
+                
+                <div class="scroll-container">
+                    
+                    <!-- Header -->
+                    <div class="dash-header">
+                        <div class="logo-section">
+                            <svg class="logo-icon" viewBox="0 0 24 24">
+                                <path d="M2 21h18v-2H2v2zM20 8h-2V5h2v3zm-2-5H4v13h14V3zm2 2h2v5h-2V5zM2 17h20v2H2v-2zM9 5c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v1H9V5z"/>
+                            </svg>
+                            <h2 class="logo-text">
+                                KOPI
+                                <span>KITA</span>
+                            </h2>
+                        </div>
+                        
+                        <!-- Desktop Navigation Menu -->
+                        <nav class="desktop-nav">
+                            <button class="desktop-nav-link" data-tab="beranda" onclick="switchTab('beranda')">Beranda</button>
+                            <button class="desktop-nav-link" data-tab="menu" onclick="switchTab('menu')">Cari Menu</button>
+                            <button class="desktop-nav-link" data-tab="akun" onclick="switchTab('akun')">Riwayat Pesanan</button>
+                        </nav>
+                        
+                        <div class="header-actions">
+                            <div class="header-btn btn-barista" onclick="openBaristaLogin()" title="Portal Kasir">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                </svg>
+                            </div>
+                            <div class="header-btn btn-notifications">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                                </svg>
+                                <span class="badge-count">3</span>
+                            </div>
+                            <div class="profile-avatar" onclick="switchTab('akun')">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Welcome Title -->
+                    <div class="welcome-section">
+                        <h2 id="welcome-text">Selamat Datang di Kopi Kita!<br>Waktunya Kopi Sore ☕</h2>
+                    </div>
+
+                    <!-- Interactive Promo Banner Slider -->
+                    <div class="promo-slider-container">
+                        <div class="promo-slides" id="promo-slides">
+                            <div class="promo-slide">
+                                <div class="promo-content">
+                                    <span class="promo-tag">Promo Hari Ini :</span>
+                                    <h3 class="promo-title">Diskon 20% Semua Es Kopi</h3>
+                                    <p class="promo-subtitle">Berlaku pukul 14:00 - 17:00 WIB</p>
+                                </div>
+                                <img src="assets/promo_coffee.png" alt="Promo Es Kopi" class="promo-image">
+                            </div>
+                            <div class="promo-slide" style="background-color: #5C3D2E;">
+                                <div class="promo-content">
+                                    <span class="promo-tag">Kopi Eksklusif :</span>
+                                    <h3 class="promo-title">Beli 2 Cappuccino Gratis 1</h3>
+                                    <p class="promo-subtitle">Nikmati bersama teman kerja Anda</p>
+                                </div>
+                                <img src="assets/cappuccino.png" alt="Promo Cappuccino" class="promo-image">
+                            </div>
+                            <div class="promo-slide" style="background-color: #2E4534;">
+                                <div class="promo-content">
+                                    <span class="promo-tag">Camilan Sore :</span>
+                                    <h3 class="promo-title">Paket Croissant + Iced Latte</h3>
+                                    <p class="promo-subtitle">Hemat Rp 15k setiap pembelian paket</p>
+                                </div>
+                                <img src="assets/croissant.png" alt="Promo Croissant" class="promo-image">
+                            </div>
+                        </div>
+                        <div class="slider-dots">
+                            <span class="slider-dot active" onclick="goToSlide(0)"></span>
+                            <span class="slider-dot" onclick="goToSlide(1)"></span>
+                            <span class="slider-dot" onclick="goToSlide(2)"></span>
+                        </div>
+                    </div>
+
+                    <!-- Signature Picks / Best Sellers Showcase -->
+                    <div class="featured-picks-section">
+                        <div class="section-header-row">
+                            <h3 class="home-section-title">Menu Rekomendasi Terlaris</h3>
+                            <span class="home-section-subtitle">Pilihan Barista Kami</span>
+                        </div>
+                        
+                        <div class="featured-picks-container" id="featured-picks-container">
+                            <!-- Rendered dynamically by JS to keep price synced -->
+                        </div>
+                    </div>
+
+                    <!-- Quality / Value Section -->
+                    <div class="quality-benefits-section">
+                        <h3 class="quality-title-head">Kenapa Kopi Kita?</h3>
+                        <div class="quality-benefits-grid">
+                            <div class="quality-card">
+                                <div class="quality-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M17 8C16.11 8 15.39 8.56 15.13 9.35C14.07 9.1 13 9.77 13 10.87V17H11V10.87C11 9.77 9.93 9.1 8.87 9.35C8.61 8.56 7.89 8 7 8C5.9 8 5 8.9 5 10V18C5 19.1 5.9 20 7 20H17C18.1 20 19 19.1 19 18V10C19 8.9 18.1 8 17 8Z"/></svg>
+                                </div>
+                                <h4>Biji Kopi Pilihan</h4>
+                                <p>100% Biji kopi arabika & robusta lokal organik dipetik langsung dari petani lokal terbaik.</p>
+                            </div>
+                            <div class="quality-card">
+                                <div class="quality-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M2 21H20V19H2V21ZM20 8H18V5H20V8ZM18 3H4V16H18V3ZM20 5H22V10H20V5ZM2 17H22V19H2V17ZM9 5C9 4.45 9.45 4 10 4H14C14.55 4 15 4.45 15 5V6H9V5Z"/></svg>
+                                </div>
+                                <h4>Seduhan Barista</h4>
+                                <p>Diracik presisi dengan suhu & perbandingan ideal oleh tim barista berlisensi profesional.</p>
+                            </div>
+                            <div class="quality-card">
+                                <div class="quality-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.3-11.7L15 7l-4.5 4.5L8.5 9.5 7.2 10.8l2.8 2.8 6.3-6.3z"/></svg>
+                                </div>
+                                <h4>Suasana Kafe Terbaik</h4>
+                                <p>Ciptakan ketenangan sore hari Anda berkat ruang saji berdesain minimalis dan hangat.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action (CTA) Banner -->
+                    <div class="home-cta-banner">
+                        <div class="cta-overlay"></div>
+                        <div class="cta-content">
+                            <h4>Temukan Cita Rasa Kopi Favorit Anda</h4>
+                            <p>Ada puluhan varian es kopi susu aren, cappuccino wangi, boba, matcha creamy, dan pastry lezat yang siap menyegarkan harimu.</p>
+                            <button class="btn-cta-explore" onclick="switchTab('menu')">
+                                <span>Jelajahi Menu Utama</span>
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SCREEN 3B: CARI MENU SCREEN (Layar Cari Menu)
+                 ========================================== -->
+            <div id="screen-menu" class="screen dashboard-layout">
+                
+                <div class="scroll-container">
+                    
+                    <!-- Header -->
+                    <div class="dash-header">
+                        <div class="logo-section">
+                            <svg class="logo-icon" viewBox="0 0 24 24">
+                                <path d="M2 21h18v-2H2v2zM20 8h-2V5h2v3zm-2-5H4v13h14V3zm2 2h2v5h-2V5zM2 17h20v2H2v-2zM9 5c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v1H9V5z"/>
+                            </svg>
+                            <h2 class="logo-text">
+                                KOPI
+                                <span>KITA</span>
+                            </h2>
+                        </div>
+                        
+                        <!-- Desktop Navigation Menu -->
+                        <nav class="desktop-nav">
+                            <button class="desktop-nav-link" data-tab="beranda" onclick="switchTab('beranda')">Beranda</button>
+                            <button class="desktop-nav-link" data-tab="menu" onclick="switchTab('menu')">Cari Menu</button>
+                            <button class="desktop-nav-link" data-tab="akun" onclick="switchTab('akun')">Riwayat Pesanan</button>
+                        </nav>
+                        
+                        <div class="header-actions">
+                            <div class="header-btn btn-barista" onclick="openBaristaLogin()" title="Portal Kasir">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                                </svg>
+                            </div>
+                            <div class="header-btn btn-notifications">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                                </svg>
+                                <span class="badge-count">3</span>
+                            </div>
+                            <div class="profile-avatar" onclick="switchTab('akun')">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Bar Panel (Always Visible on Cari Menu Page) -->
+                    <div class="search-container" id="search-box" style="display: block !important;">
+                        <div class="search-bar">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                            <input type="text" id="search-input" placeholder="Cari es kopi aren, croissant, matcha...">
+                        </div>
+                    </div>
+
+                    <!-- Horizontal Scroll Categories -->
+                    <div class="categories-container" id="category-tabs-row">
+                        <!-- Category tabs generated dynamically by JS -->
+                    </div>
+
+                    <!-- Two Column Dynamic Products Grid -->
+                    <div class="products-grid" id="products-grid-container">
+                        <!-- Products rendered dynamically by JS -->
+                    </div>
+
+                    <!-- Empty state search -->
+                    <div class="empty-state" id="search-empty-state">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <h3>Kopi Tidak Ditemukan</h3>
+                        <p>Cobalah mengetik dengan kata kunci produk lainnya.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SCREEN 4: CART & ORDERS SCREEN
+                 ========================================== -->
+            <div id="screen-orders" class="screen orders-screen">
+                <div class="screen-header">
+                    <h2>Keranjang Belanja</h2>
+                    <button class="modal-close-btn" id="btn-clear-cart" title="Kosongkan Keranjang" style="border:none; background:none;">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#C0392B">
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-cart-state" id="empty-cart-view">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17.21 9l-4.38-6.56c-.18-.27-.51-.44-.83-.44-.32 0-.65.17-.83.44L6.79 9H2c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2h-4.79zM9 9l3-4.5L15 9H9zm13 11H2v-9h20v9zM5 13h2v4H5zm12 0h2v4h-2z"/>
+                    </svg>
+                    <h3>Keranjang Anda Kosong</h3>
+                    <p>Cita rasa premium menanti Anda. Jelajahi menu utama dan tambahkan minuman favorit Anda sekarang!</p>
+                    <button class="btn-primary" onclick="switchTab('beranda')" style="width: auto; padding: 12px 24px;">Kembali ke Menu</button>
+                </div>
+
+                <!-- Populated Cart View -->
+                <div id="populated-cart-view" style="display: none;">
+                    <div class="cart-list" id="cart-items-container">
+                        <!-- Items rendered dynamically by JS -->
+                    </div>
+
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal">Rp 0</span>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Diskon</span>
+                            <span id="summary-discount">-Rp 0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Pembayaran</span>
+                            <span id="summary-total">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <!-- Customer Information Form -->
+                    <div class="customer-info-section" style="margin-bottom: 20px;">
+                        <h4 class="payment-section-title" style="margin-bottom: 8px;">Nama Pemesan</h4>
+                        <div class="checkout-name-input-wrapper">
+                            <svg viewBox="0 0 24 24" width="18" height="18" class="input-icon">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            <input type="text" id="checkout-customer-name" placeholder="Masukkan Nama Pemesan..." required>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method Selector -->
+                    <div class="payment-method-section" style="margin-bottom: 25px;">
+                        <h4 class="payment-section-title">Metode Pembayaran</h4>
+                        <div class="payment-method-card active" id="pay-method-qris" style="cursor: default; margin-top: 10px;">
+                            <div class="payment-card-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M4 4h7v7H4zm2 2v3h3V6zm0 12h3v3H6zm-2-4h7v7H4zm10-12h7v7h-7zm2 2v3h3V6zm-2 10h3v3h-3zm3 3h3v2h-3zm3-3h2v3h-2zm-3-3h3v3h-3zm3 0h3v3h-3zm-6 3h3v3h-3zm6-6h2v3h-2z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="payment-card-info">
+                                <span class="payment-name">QRIS (E-Wallet)</span>
+                                <span class="payment-desc">Scan & Bayar Instan Aman</span>
+                            </div>
+                            <div class="payment-card-check" style="background-color: var(--accent-green);">
+                                <svg viewBox="0 0 24 24" width="12" height="12" fill="white">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" id="btn-checkout" style="margin-bottom: 30px;">
+                        <span>Proses Pembayaran</span>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
+                            <path d="M17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm1.96-3.84l.07-.12h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SCREEN 5: ACCOUNT & PROFILE SCREEN
+                 ========================================== -->
+            <div id="screen-account" class="screen profile-screen">
+                <div class="screen-header">
+                    <h2>Riwayat Pesanan</h2>
+                    <!-- Desktop Navigation Menu -->
+                    <nav class="desktop-nav">
+                        <button class="desktop-nav-link" data-tab="beranda" onclick="switchTab('beranda')">Beranda</button>
+                        <button class="desktop-nav-link" data-tab="menu" onclick="switchTab('menu')">Cari Menu</button>
+                        <button class="desktop-nav-link" data-tab="akun" onclick="switchTab('akun')">Riwayat</button>
+                    </nav>
+                    <div style="width: 40px; height: 40px; display: none;" class="desktop-only-spacer"></div>
+                </div>
+
+                <div class="scroll-container" style="padding-bottom: 100px;">
+                    <div id="order-history-empty" class="empty-cart-state" style="padding: 40px 20px; text-align: center;">
+                        <svg viewBox="0 0 24 24" style="width: 60px; height: 60px; fill: var(--primary); opacity: 0.3; margin-bottom: 15px; display: block; margin: 0 auto 15px auto;">
+                            <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                        </svg>
+                        <h4 style="font-family: var(--font-serif); color: var(--primary); margin: 0 0 8px 0; font-size: 16px;">Belum Ada Pesanan</h4>
+                        <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.4;">Mulailah memesan kopi kesayangan Anda dan rasakan kenikmatannya!</p>
+                    </div>
+                    <div class="history-list" id="order-history-list">
+                        <!-- Orders rendered dynamically by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SCREEN 6: BARISTA KITCHEN DISPLAY SCREEN (KDS)
+                 ========================================== -->
+            <div id="screen-barista" class="screen barista-layout">
+                <!-- Kitchen Header -->
+                <div class="kds-header" style="background: var(--primary); color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0,0,0,0.15); z-index: 10;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="kds-logo" style="background: white; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M2 21h18v-2H2v2zM20 8h-2V5h2v3zm-2-5H4v13h14V3zm2 2h2v5h-2V5zM2 17h20v2H2v-2zM9 5c0-.55.45-1 1-1h4c.55 0 1 .45 1 1v1H9V5z"/>
+                            </svg>
+                        </div>
+                        <div style="text-align: left;">
+                            <h3 style="margin: 0; font-family: var(--font-serif); font-size: 15px; font-weight: 700; color: white;">Kopi Kita - KDS</h3>
+                            <span style="font-size: 11px; opacity: 0.8; display: block; color: rgba(255,255,255,0.9);">Kitchen Display System • Kasir Utama</span>
+                        </div>
+                    </div>
+                    <button class="btn-exit-kds" onclick="switchBaristaMode(false)" style="background: rgba(255,255,255,0.2); border: none; border-radius: 20px; color: white; padding: 6px 14px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: background 0.2s;">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                            <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                        <span>Keluar POS</span>
+                    </button>
+                </div>
+                
+                <!-- KDS Dashboard Body -->
+                <div class="scroll-container" style="background-color: #17120E; color: #EEEEEE; padding-bottom: 100px; height: calc(100% - 66px); overflow-y: auto;">
+                    
+                    <!-- Stats Grid for Kitchen -->
+                    <div class="kds-stats-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 16px 20px;">
+                        <div class="kds-stat-card" style="background: #251D18; border-left: 4px solid var(--accent-orange); padding: 12px; border-radius: 12px; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                            <span style="font-size: 10px; color: #BCA394; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px; letter-spacing: 0.5px;">Antrean Aktif</span>
+                            <span id="kds-stat-active" style="font-size: 20px; font-weight: 800; color: var(--accent-orange); font-family: monospace;">0 Pesanan</span>
+                        </div>
+                        <div class="kds-stat-card" style="background: #251D18; border-left: 4px solid var(--accent-green); padding: 12px; border-radius: 12px; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                            <span style="font-size: 10px; color: #BCA394; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px; letter-spacing: 0.5px;">Selesai Hari Ini</span>
+                            <span id="kds-stat-completed" style="font-size: 20px; font-weight: 800; color: var(--accent-green); font-family: monospace;">0</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Sub-header & Switch tab for active/completed in kitchen -->
+                    <div style="padding: 0 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #9E8576; margin: 0; font-weight: 700;">Daftar Pesanan Dapur</h4>
+                        <div class="kds-tab-pills" style="display: flex; background: #251D18; padding: 3px; border-radius: 20px; gap: 4px; border: 1px solid rgba(255,255,255,0.05);">
+                            <button id="kds-tab-active" class="kds-pill active" onclick="setKdsView('active')" style="background: var(--primary); color: white; border: none; border-radius: 15px; padding: 4px 12px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s;">Antrean</button>
+                            <button id="kds-tab-done" class="kds-pill" onclick="setKdsView('done')" style="background: transparent; color: #BCA394; border: none; border-radius: 15px; padding: 4px 12px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s;">Selesai</button>
+                        </div>
+                    </div>
+                    
+                    <!-- KDS Active Queue Container -->
+                    <div id="kds-queue-container" style="padding: 0 20px; display: flex; flex-direction: column; gap: 14px;">
+                        <!-- Rendered dynamically by JS -->
+                    </div>
+                    
+                    <!-- KDS Empty State -->
+                    <div id="kds-empty-state" class="empty-cart-state" style="padding: 60px 20px; text-align: center; display: none;">
+                        <svg viewBox="0 0 24 24" style="width: 50px; height: 50px; fill: var(--primary); opacity: 0.3; margin: 0 auto 12px auto; display: block;">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                        </svg>
+                        <h4 style="color: #BCA394; margin: 0 0 6px 0; font-family: var(--font-serif); font-size: 15px;">Belum Ada Antrean</h4>
+                        <p style="font-size: 12px; color: #8A7365; margin: 0; line-height: 1.4;">Pesanan baru berstatus paid via QRIS akan otomatis masuk di sini.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 SCREEN 7: ADMIN PORTAL DASHBOARD SCREEN
+                 ========================================== -->
+            <div id="screen-admin" class="screen admin-layout" style="display: none; height: 100%;">
+                <!-- Admin Header -->
+                <div class="kds-header" style="background: #251D18; color: white; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(0,0,0,0.15); z-index: 10;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="admin-logo" style="background: var(--primary); border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: white;">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z"/>
+                            </svg>
+                        </div>
+                        <div style="text-align: left;">
+                            <h3 style="margin: 0; font-family: var(--font-serif); font-size: 15px; font-weight: 700; color: white;">Kopi Kita - Admin</h3>
+                            <span style="font-size: 11px; opacity: 0.8; display: block; color: #BCA394;">Dashboard Sistem Analisis & Menu CRUD</span>
+                        </div>
+                    </div>
+                    <button class="btn-exit-kds" onclick="switchAdminMode(false)" style="background: rgba(255,255,255,0.1); border: none; border-radius: 20px; color: white; padding: 6px 14px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: background 0.2s; outline: none;">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                            <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                        </svg>
+                        <span>Keluar POS</span>
+                    </button>
+                </div>
+
+                <!-- Admin Tabs Switches -->
+                <div class="admin-tabs" style="display: flex; background: #251D18; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 8px 20px; gap: 10px;">
+                    <button id="admin-tab-analytics" class="admin-tab active" onclick="switchAdminTab('analytics')" style="flex: 1; border: none; background: var(--primary); color: white; border-radius: 8px; padding: 8px 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none;">📈 Analisis</button>
+                    <button id="admin-tab-menu" class="admin-tab" onclick="switchAdminTab('menu')" style="flex: 1; border: none; background: transparent; color: #BCA394; border-radius: 8px; padding: 8px 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none;">☕ Kelola Menu</button>
+                    <button id="admin-tab-settings" class="admin-tab" onclick="switchAdminTab('settings')" style="flex: 1; border: none; background: transparent; color: #BCA394; border-radius: 8px; padding: 8px 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none;">⚙️ Pengaturan</button>
+                </div>
+
+                <div class="scroll-container" style="background-color: #17120E; color: #EEEEEE; padding-bottom: 100px; height: calc(100% - 110px); overflow-y: auto; box-sizing: border-box;">
+                    
+                    <!-- PANEL 1: ANALYTICS PANEL -->
+                    <div id="admin-panel-analytics" class="admin-panel active" style="padding: 16px 20px; display: block;">
+                        <!-- Period Selector -->
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #9E8576; font-weight: 700;">Filter Rentang Waktu</span>
+                                <div class="admin-period-pills" style="display: flex; background: #251D18; padding: 3px; border-radius: 20px; gap: 4px; border: 1px solid rgba(255,255,255,0.05);">
+                                    <button id="admin-period-day" class="admin-period-pill active" onclick="setAdminPeriod('day')" style="background: var(--primary); color: white; border: none; border-radius: 15px; padding: 4px 10px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none;">Hari Ini</button>
+                                    <button id="admin-period-month" class="admin-period-pill" onclick="setAdminPeriod('month')" style="background: transparent; color: #BCA394; border: none; border-radius: 15px; padding: 4px 10px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none;">Bulan Ini</button>
+                                    <button id="admin-period-year" class="admin-period-pill" onclick="setAdminPeriod('year')" style="background: transparent; color: #BCA394; border: none; border-radius: 15px; padding: 4px 10px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none;">Tahun Ini</button>
+                                    <button id="admin-period-custom" class="admin-period-pill" onclick="setAdminPeriod('custom')" style="background: transparent; color: #BCA394; border: none; border-radius: 15px; padding: 4px 10px; font-size: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; outline: none;">Kalender</button>
+                                </div>
+                            </div>
+                            <!-- Custom calendar pickers container -->
+                            <div id="admin-custom-pickers" style="display: none; grid-template-columns: 1fr 1fr; gap: 10px; padding: 8px 12px; background: #251D18; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="display: flex; flex-direction: column; gap: 4px; text-align: left;">
+                                    <label for="admin-custom-date" style="font-size: 9px; font-weight: 700; color: #BCA394; text-transform: uppercase;">Pilih Tanggal</label>
+                                    <input type="date" id="admin-custom-date" onchange="applyCustomDateFilter(this.value)" style="width: 100%; padding: 6px 10px; border-radius: 6px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 11px; outline: none; box-sizing: border-box;">
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 4px; text-align: left;">
+                                    <label for="admin-custom-month" style="font-size: 9px; font-weight: 700; color: #BCA394; text-transform: uppercase;">Pilih Bulan</label>
+                                    <input type="month" id="admin-custom-month" onchange="applyCustomMonthFilter(this.value)" style="width: 100%; padding: 6px 10px; border-radius: 6px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 11px; outline: none; box-sizing: border-box;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2x2 Grid Analytics Metrics -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                            <!-- metric 1 -->
+                            <div style="background: #251D18; padding: 12px; border-radius: 12px; border-left: 4px solid var(--primary); text-align: left;">
+                                <span style="font-size: 9px; color: #BCA394; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px;">Jumlah Transaksi</span>
+                                <span id="admin-metric-orders" style="font-size: 18px; font-weight: 800; color: white; font-family: monospace;">0 Order</span>
+                            </div>
+                            <!-- metric 2 -->
+                            <div style="background: #251D18; padding: 12px; border-radius: 12px; border-left: 4px solid #E67E22; text-align: left;">
+                                <span style="font-size: 9px; color: #BCA394; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px;">Omzet Kotor</span>
+                                <span id="admin-metric-revenue" style="font-size: 18px; font-weight: 800; color: #E67E22; font-family: monospace;">Rp 0</span>
+                            </div>
+                            <!-- metric 3 -->
+                            <div style="background: #251D18; padding: 12px; border-radius: 12px; border-left: 4px solid #95A5A6; text-align: left;">
+                                <span style="font-size: 9px; color: #BCA394; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 2px;">Total Harga Modal</span>
+                                <span id="admin-metric-cost" style="font-size: 18px; font-weight: 800; color: #BDC3C7; font-family: monospace;">Rp 0</span>
+                            </div>
+                            <!-- metric 4 -->
+                            <div style="background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(39, 174, 96, 0.2)); padding: 12px; border-radius: 12px; border-left: 4px solid var(--accent-green); text-align: left; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.15);">
+                                <span style="font-size: 9px; color: #2ECC71; text-transform: uppercase; font-weight: 800; display: block; margin-bottom: 2px; letter-spacing: 0.5px;">Untung Bersih (Real)</span>
+                                <span id="admin-metric-profit" style="font-size: 18px; font-weight: 800; color: var(--accent-green); font-family: monospace; text-shadow: 0 0 10px rgba(46,204,113,0.3);">Rp 0</span>
+                            </div>
+                        </div>
+
+                        <!-- Graphical Sales Chart Section -->
+                        <div style="background: #251D18; border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 20px;">
+                            <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #BCA394; margin: 0 0 16px 0; font-weight: 700; text-align: left;">Grafik Produk Terlaris (Qty Terjual)</h4>
+                            <!-- Pure Client-Side Dynamic SVG Chart Render Container -->
+                            <div id="admin-svg-chart-container" style="width: 100%; min-height: 160px; display: flex; align-items: center; justify-content: center;">
+                                <!-- Rendered dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Periodic Sales History List -->
+                        <div style="background: #251D18; border-radius: 16px; padding: 16px; border: 1px solid rgba(255,255,255,0.05);">
+                            <h4 style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #BCA394; margin: 0 0 12px 0; font-weight: 700; text-align: left;">Detail Riwayat Transaksi</h4>
+                            <div id="admin-sales-history-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 250px; overflow-y: auto; padding-right: 4px;">
+                                <!-- Transaksi rendered dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PANEL 2: MANAGE MENU PANEL -->
+                    <div id="admin-panel-menu" class="admin-panel" style="padding: 16px 20px; display: none;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #9E8576; font-weight: 700;">Kelola Menu Aktif</span>
+                            <button onclick="openProductModal()" style="background: var(--primary); border: none; border-radius: 20px; color: white; padding: 6px 14px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: opacity 0.2s; outline: none;">
+                                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                </svg>
+                                <span>Tambah Menu</span>
+                            </button>
+                        </div>
+
+                        <!-- CRUD list menu -->
+                        <div id="admin-crud-products-list" style="display: flex; flex-direction: column; gap: 12px;">
+                            <!-- items rendered dynamically by JS -->
+                        </div>
+                    </div>
+
+                    <!-- PANEL 3: SETTINGS PANEL -->
+                    <div id="admin-panel-settings" class="admin-panel" style="padding: 16px 20px; display: none;">
+                        <div class="admin-settings-card">
+                            <h4>⚙️ Identitas & Pembayaran Toko</h4>
+                            
+                            <form id="admin-settings-form" onsubmit="saveSettingsForm(event)" style="display: flex; flex-direction: column; gap: 16px;">
+                                <div class="form-group">
+                                    <label for="settings-shop-name">Nama Toko</label>
+                                    <input type="text" id="settings-shop-name" class="settings-input-premium" required placeholder="Misal: Kopi Kita">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Kode QRIS Pembayaran (Upload Gambar Kustom)</label>
+                                    <div style="display: flex; gap: 12px; align-items: center; margin-top: 2px;">
+                                        <input type="file" id="settings-qris-file" accept="image/*" onchange="handleQrisImageUpload(event)" style="display: none;">
+                                        <button type="button" class="btn-qris-upload" onclick="document.getElementById('settings-qris-file').click()">
+                                            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block;">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                                            </svg>
+                                            Pilih Berkas QRIS
+                                        </button>
+                                        <span id="settings-qris-filename" class="settings-qris-filename-text">Bawaan (SVG Sistem)</span>
+                                    </div>
+                                    
+                                    <!-- QRIS Preview -->
+                                    <div id="settings-qris-preview-box" class="settings-qris-preview-frame">
+                                        <div id="settings-qris-preview-container" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                                            <!-- QRIS preview content rendered dynamically -->
+                                        </div>
+                                    </div>
+                                    <button type="button" id="btn-reset-qris" class="btn-reset-qris-premium" onclick="resetQrisToDefault()" style="display: none;">
+                                        Reset ke QRIS Sistem
+                                    </button>
+                                </div>
+                                
+                                <div style="border-top: 1px dashed rgba(255,255,255,0.08); margin: 8px 0 4px 0;"></div>
+                                
+                                <div style="display: flex; gap: 16px;">
+                                    <div class="form-group" style="flex: 1;">
+                                        <label for="settings-cashier-pin">PIN Kasir/Barista</label>
+                                        <input type="text" id="settings-cashier-pin" class="settings-input-premium settings-input-pin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="1234">
+                                    </div>
+                                    <div class="form-group" style="flex: 1;">
+                                        <label for="settings-admin-pin">PIN Administrator</label>
+                                        <input type="text" id="settings-admin-pin" class="settings-input-premium settings-input-pin" required inputmode="numeric" pattern="[0-9]{4}" maxlength="4" placeholder="9999">
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn-save-settings-premium">
+                                    Simpan Pengaturan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 FLOATING BOTTOM NAVIGATION BAR
+                 ========================================== -->
+            <div id="main-navigation-bar" class="bottom-nav">
+                <div class="nav-item active" onclick="switchTab('beranda')" id="nav-beranda">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span>Beranda</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('menu')" id="nav-menu">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"/>
+                    </svg>
+                    <span>Menu</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('pesanan')" id="nav-pesanan">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2zM3 5v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.11 0-2 .9-2 2zm16 14H5V5h14v14z"/>
+                    </svg>
+                    <span class="nav-badge" id="cart-count-badge" style="display: none;">0</span>
+                    <span>Pesanan</span>
+                </div>
+                <div class="nav-item" onclick="switchTab('akun')" id="nav-akun">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                    </svg>
+                    <span>Riwayat</span>
+                </div>
+            </div>
+
+
+
+            <!-- ==========================================================
+                 POPUP MODAL 4: QRIS PAYMENT MODAL (OVERLAY)
+                 ========================================================== -->
+            <div id="qris-payment-modal" class="otp-overlay">
+                <div class="otp-modal qris-modal">
+                    <div class="qris-header">
+                        <div class="qris-logo-row">
+                            <h3 class="qris-title">QRIS</h3>
+                            <span class="qris-merchant">KOPI KITA</span>
+                        </div>
+                        <p class="qris-subtitle">Scan kode QR di bawah ini untuk menyelesaikan pembayaran</p>
+                    </div>
+
+                    <!-- QR Code Display Box -->
+                    <div class="qris-code-box" id="qris-qr-code-container">
+                        <svg viewBox="0 0 100 100" class="qris-qr-svg">
+                            <!-- Outer border markers -->
+                            <!-- Top Left -->
+                            <rect x="5" y="5" width="25" height="25" fill="#332115" />
+                            <rect x="9" y="9" width="17" height="17" fill="#FAF6F0" />
+                            <rect x="13" y="13" width="9" height="9" fill="#332115" />
+                            
+                            <!-- Top Right -->
+                            <rect x="70" y="5" width="25" height="25" fill="#332115" />
+                            <rect x="74" y="9" width="17" height="17" fill="#FAF6F0" />
+                            <rect x="78" y="13" width="9" height="9" fill="#332115" />
+                            
+                            <!-- Bottom Left -->
+                            <rect x="5" y="70" width="25" height="25" fill="#332115" />
+                            <rect x="9" y="74" width="17" height="17" fill="#FAF6F0" />
+                            <rect x="13" y="78" width="9" height="9" fill="#332115" />
+
+                            <!-- Bottom Right tiny alignment helper -->
+                            <rect x="75" y="75" width="10" height="10" fill="#332115" />
+                            <rect x="78" y="78" width="4" height="4" fill="#FAF6F0" />
+                            
+                            <!-- Center coffee-cup stylized pixel art / logo placeholder -->
+                            <rect x="42" y="42" width="16" height="16" fill="#3D5A45" rx="3" />
+                            <path d="M46 47h6v3a3 3 0 0 1-3 3h0a3 3 0 0 1-3-3v-3zm7 1.5h1a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1h-1v-2z" fill="#FAF6F0" stroke="#FAF6F0" stroke-width="0.5"/>
+                            
+                            <!-- Randomized QR Pixels for genuine look -->
+                            <rect x="35" y="10" width="5" height="5" fill="#332115" />
+                            <rect x="45" y="5" width="5" height="10" fill="#332115" />
+                            <rect x="55" y="15" width="10" height="5" fill="#332115" />
+                            <rect x="35" y="25" width="10" height="5" fill="#332115" />
+                            <rect x="50" y="25" width="5" height="10" fill="#332115" />
+                            
+                            <rect x="10" y="35" width="10" height="5" fill="#332115" />
+                            <rect x="25" y="40" width="5" height="15" fill="#332115" />
+                            <rect x="5" y="50" width="15" height="5" fill="#332115" />
+                            <rect x="15" y="60" width="10" height="5" fill="#332115" />
+                            
+                            <rect x="75" y="35" width="5" height="10" fill="#332115" />
+                            <rect x="85" y="40" width="10" height="5" fill="#332115" />
+                            <rect x="70" y="50" width="15" height="5" fill="#332115" />
+                            <rect x="80" y="60" width="5" height="10" fill="#332115" />
+                            
+                            <rect x="35" y="75" width="10" height="5" fill="#332115" />
+                            <rect x="50" y="70" width="5" height="15" fill="#332115" />
+                            <rect x="60" y="80" width="10" height="5" fill="#332115" />
+                            <rect x="35" y="85" width="5" height="10" fill="#332115" />
+                            <rect x="50" y="90" width="15" height="5" fill="#332115" />
+                        </svg>
+                    </div>
+                    
+                    <!-- Download QRIS Button -->
+                    <button type="button" class="btn-qris-download-client" onclick="downloadQrisCode()">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Unduh Kode QRIS
+                    </button>
+
+                    <!-- Payment Amount Display -->
+                    <div class="qris-amount-box">
+                        <span class="qris-amount-label">Total Pembayaran</span>
+                        <span class="qris-amount-val" id="qris-total-amount">Rp 0</span>
+                    </div>
+
+                    <!-- QRIS Status & Loading Spinner -->
+                    <div class="qris-status-box" style="margin-bottom: 12px;">
+                        <div class="qris-spinner" id="qris-loading-spinner"></div>
+                        <span class="qris-status-text" id="qris-status-message">Menunggu pembayaran Anda...</span>
+                    </div>
+
+                    <!-- Payment Proof Upload Section -->
+                    <div class="qris-proof-upload-section" style="margin-bottom: 16px;">
+                        <span class="qris-amount-label" style="display: block; margin-bottom: 8px; font-weight: 700; text-align: left; font-size: 11px;">Unggah Bukti Bayar (Wajib Screenshot Transfer)</span>
+                        <div class="qris-upload-area" id="qris-drag-drop-area" onclick="document.getElementById('qris-proof-file-input').click()" style="border: 2.5px dashed var(--border-color); border-radius: 14px; padding: 14px; text-align: center; cursor: pointer; background: rgba(51, 33, 21, 0.015); transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 85px; box-sizing: border-box; position: relative;">
+                            <input type="file" id="qris-proof-file-input" accept="image/*" style="display: none;">
+                            <div id="qris-upload-placeholder" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                                <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--primary)" style="opacity: 0.7;">
+                                    <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/>
+                                </svg>
+                                <span style="font-size: 11px; font-weight: 700; color: var(--text-main);">Ketuk / Taruh Bukti Transfer</span>
+                                <span style="font-size: 9px; color: var(--text-muted);">Format: JPG, JPEG, PNG</span>
+                            </div>
+                            <div id="qris-upload-preview-container" style="display: none; align-items: center; gap: 10px; width: 100%;">
+                                <img id="qris-upload-preview-img" src="" alt="Bukti Bayar" style="width: 48px; height: 48px; object-fit: cover; border-radius: 8px; border: 1.5px solid var(--border-color); background: #eee;">
+                                <div style="text-align: left; flex: 1; overflow: hidden;">
+                                    <span id="qris-upload-file-name" style="font-size: 11px; font-weight: 700; color: var(--accent-green); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">bukti_bayar.png</span>
+                                    <span style="font-size: 9px; color: var(--text-muted); display: block; margin-top: 1px;">✓ Bukti siap dikirim</span>
+                                </div>
+                                <button type="button" id="btn-remove-qris-proof" onclick="removeQrisProof(event)" style="border: none; background: rgba(231,76,60,0.12); color: #E74C3C; padding: 4px; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s;">
+                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
+                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Row -->
+                    <div class="otp-action-row">
+                        <button type="button" class="btn-otp-cancel" id="btn-qris-cancel" style="flex: 1;">Batal</button>
+                        <button type="button" class="btn-otp-verify" id="btn-qris-submit" style="flex: 1.2; background-color: var(--accent-green);">Kirim Bukti & Bayar</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================================
+         POPUP MODAL 1: PRODUCT DETAILS MODAL (OVERLAY)
+         ========================================================== -->
+    <div id="product-detail-modal" class="modal-overlay">
+        <div class="detail-modal">
+            <div class="modal-drag-handle"></div>
+            
+            <div class="modal-header">
+                <h3 style="font-family: var(--font-serif); font-size: 18px; color: var(--primary);">Detail Produk</h3>
+                <div class="modal-close-btn" id="btn-close-modal">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-img-wrapper">
+                    <img id="modal-product-img" src="assets/es_kopi_susu.png" alt="Gambar Kopi" class="modal-img">
+                </div>
+
+                <div class="modal-title-row">
+                    <h2 id="modal-product-name">Es Kopi Susu Aren</h2>
+                    <div class="modal-rating-badge">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                        <span id="modal-product-rating">4.9</span>
+                    </div>
+                </div>
+
+                <p class="modal-description" id="modal-product-desc">
+                    Espresso robusta berkualitas tinggi dipadukan dengan susu segar yang gurih dan pemanis alami dari gula aren cair murni. Memberikan kenikmatan manis-lembut yang pas untuk sore hari Anda.
+                </p>
+
+                <!-- Product Customization: Sizes -->
+                <div class="option-section">
+                    <span class="option-title">Ukuran</span>
+                    <div class="option-chips" id="option-sizes">
+                        <div class="option-chip active" data-value="Medium">Medium</div>
+                        <div class="option-chip" data-value="Large (+Rp 5.000)">Large (+Rp 5.000)</div>
+                    </div>
+                </div>
+
+                <!-- Product Customization: Ice Level -->
+                <div class="option-section" id="ice-option-container">
+                    <span class="option-title">Level Es Batu</span>
+                    <div class="option-chips" id="option-ice">
+                        <div class="option-chip active" data-value="Normal">Normal</div>
+                        <div class="option-chip" data-value="Less Ice">Less Ice</div>
+                        <div class="option-chip" data-value="No Ice">No Ice</div>
+                    </div>
+                </div>
+
+                <!-- Quantity & Price Block -->
+                <div class="qty-price-row">
+                    <div class="modal-price-col">
+                        <span>Total Harga</span>
+                        <h3 id="modal-price-display">Rp 25.000</h3>
+                    </div>
+                    <div class="qty-counter">
+                        <button class="qty-btn" id="btn-qty-minus">-</button>
+                        <span class="qty-number" id="modal-qty-number">1</span>
+                        <button class="qty-btn" id="btn-qty-plus">+</button>
+                    </div>
+                </div>
+
+                <div class="modal-action-btn">
+                    <button class="btn-primary" id="btn-modal-add-to-cart">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="white" style="margin-right:8px;">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                        <span>Tambah ke Pesanan</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+         POPUP MODAL 5: BARISTA PIN LOGIN MODAL (OVERLAY)
+         ========================================================== -->
+    <div id="barista-login-modal" class="otp-overlay">
+        <div class="otp-modal barista-pin-modal" style="max-width: 320px; padding: 24px 20px;">
+            <div class="modal-header" style="border:none; padding: 0 0 8px 0; position: relative;">
+                <h3 style="font-family: var(--font-serif); font-size: 18px; color: var(--primary); text-align: center; width: 100%; margin: 0;">Portal Kasir & Barista</h3>
+                <div class="modal-close-btn" id="btn-close-barista-login" style="position: absolute; right: 0; top: 0; cursor: pointer; border: none; background: transparent; padding: 0;">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--text-muted)">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <p style="font-size: 12px; color: var(--text-muted); text-align: center; margin: 4px 0 20px 0; line-height: 1.4;">Masukkan 4-digit PIN keamanan kasir untuk mengakses KDS</p>
+            
+            <!-- Pin Dots Indicator -->
+            <div class="pin-dots-container" style="display: flex; justify-content: center; gap: 16px; margin-bottom: 24px;">
+                <span class="pin-dot" id="pin-dot-1" style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--primary); transition: background-color 0.15s;"></span>
+                <span class="pin-dot" id="pin-dot-2" style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--primary); transition: background-color 0.15s;"></span>
+                <span class="pin-dot" id="pin-dot-3" style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--primary); transition: background-color 0.15s;"></span>
+                <span class="pin-dot" id="pin-dot-4" style="width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--primary); transition: background-color 0.15s;"></span>
+            </div>
+            
+            <!-- Hidden PIN input value -->
+            <input type="hidden" id="barista-pin-value" value="">
+            
+            <!-- Keypad Grid -->
+            <div class="pin-keypad" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 220px; margin: 0 auto 20px auto;">
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('1')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">1</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('2')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">2</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('3')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">3</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('4')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">4</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('5')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">5</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('6')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">6</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('7')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">7</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('8')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">8</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('9')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">9</button>
+                <button type="button" class="keypad-btn danger" onclick="clearDigitPin()" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid #FADBD8; background: #FDEDEC; font-size: 16px; font-weight: 700; color: #E74C3C; cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">C</button>
+                <button type="button" class="keypad-btn" onclick="enterDigitPin('0')" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid var(--border-color); background: var(--bg-card); font-size: 18px; font-weight: 700; color: var(--primary); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">0</button>
+                <button type="button" class="keypad-btn success" onclick="submitBaristaPin()" style="height: 48px; width: 48px; border-radius: 50%; border: 1.5px solid #D4EFDF; background: #E8F8F5; font-size: 18px; font-weight: 700; color: var(--accent-green); cursor: pointer; outline: none; margin: 0 auto; display: flex; align-items: center; justify-content: center; transition: all 0.15s;">✓</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+         POPUP MODAL 6: KDS PAYMENT PROOF LIGHTBOX (OVERLAY)
+         ========================================================== -->
+    <div id="kds-payment-proof-modal" class="otp-overlay" style="z-index: 200;">
+        <div class="otp-modal" style="max-width: 340px; padding: 20px; background: var(--bg-base); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 1.5px solid var(--border-color);">
+            <div class="modal-header" style="border: none; padding: 0 0 12px 0; display: flex; justify-content: space-between; align-items: center; position: relative;">
+                <h3 style="font-family: var(--font-serif); font-size: 15px; color: var(--primary); margin: 0; font-weight: 700; text-align: center; width: 100%;">Verifikasi Bukti Pembayaran</h3>
+                <div class="modal-close-btn" onclick="closePaymentProofModal()" style="cursor: pointer; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-card); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); position: absolute; right: 0; top: -4px;">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--primary)">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </div>
+            </div>
+            <div style="text-align: center; margin-bottom: 14px; background: rgba(51, 33, 21, 0.04); padding: 8px; border-radius: 10px;">
+                <span id="kds-proof-customer-name" style="font-size: 12.5px; font-weight: 700; color: var(--primary); display: block;">Pelanggan: -</span>
+                <span id="kds-proof-order-id" style="font-size: 11px; font-family: monospace; color: var(--text-muted); display: block; margin-top: 2px;">Order ID: -</span>
+            </div>
+            <div class="proof-image-wrapper" style="width: 100%; max-height: 300px; overflow-y: auto; border-radius: 14px; border: 1.5px solid var(--border-color); background: #FAF6F0; display: flex; justify-content: center; align-items: center; box-shadow: inset 0 2px 8px rgba(0,0,0,0.03); box-sizing: border-box; padding: 4px;">
+                <img id="kds-payment-proof-img" src="" alt="Bukti Pembayaran Pelanggan" style="max-width: 100%; height: auto; display: block; object-fit: contain; border-radius: 10px;">
+            </div>
+            <div style="margin-top: 16px; display: flex; gap: 10px;">
+                <button type="button" class="btn-otp-verify" onclick="closePaymentProofModal()" style="flex: 1; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 100px; font-weight: 700; cursor: pointer; font-size: 13px; transition: opacity 0.2s;">Tutup Pratinjau</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+         POPUP MODAL 7: ADMIN PRODUCT CRUD FORM (OVERLAY)
+         ========================================================== -->
+    <div id="admin-product-modal" class="otp-overlay" style="z-index: 210;">
+        <div class="otp-modal" style="max-width: 380px; padding: 24px 20px; background: var(--bg-base); border-radius: 24px; border: 1.5px solid var(--border-color); box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+            <div class="modal-header" style="border: none; padding: 0 0 12px 0; display: flex; justify-content: space-between; align-items: center; position: relative;">
+                <h3 id="admin-modal-title" style="font-family: var(--font-serif); font-size: 16px; color: var(--primary); margin: 0; font-weight: 700; text-align: center; width: 100%;">Tambah Menu Baru</h3>
+                <div class="modal-close-btn" onclick="closeProductModal()" style="cursor: pointer; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-card); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); position: absolute; right: 0; top: -4px;">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--primary)">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <form id="admin-product-form" onsubmit="saveProductForm(event)" style="display: flex; flex-direction: column; gap: 12px; text-align: left;">
+                <input type="hidden" id="admin-product-id" value="">
+                
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 4px;">
+                    <label for="admin-product-name" style="font-size: 11px; font-weight: 700; color: var(--primary);">Nama Menu</label>
+                    <input type="text" id="admin-product-name" placeholder="Misal: Es Kopi Susu Aren" required style="width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 12px; box-sizing: border-box; outline: none;">
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 4px;">
+                        <label for="admin-product-category" style="font-size: 11px; font-weight: 700; color: var(--primary);">Kategori</label>
+                        <select id="admin-product-category" required style="width: 100%; padding: 10px; border-radius: 10px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 12px; box-sizing: border-box; outline: none;">
+                            <option value="Es Kopi">Es Kopi</option>
+                            <option value="Kopi Panas">Kopi Panas</option>
+                            <option value="Non-Kopi">Non-Kopi</option>
+                            <option value="Camilan">Camilan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 4px; grid-column: span 2;">
+                        <label for="admin-product-image" style="font-size: 11px; font-weight: 700; color: var(--primary);">Foto Menu</label>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <select id="admin-product-image" onchange="toggleProductImageSource(this.value)" required style="flex: 1; padding: 10px; border-radius: 10px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 12px; box-sizing: border-box; outline: none;">
+                                <option value="assets/es_kopi_susu.png">Es Kopi Susu Aren (Preset)</option>
+                                <option value="assets/brown_sugar.png">Brown Sugar Boba (Preset)</option>
+                                <option value="assets/iced_caramel.png">Iced Caramel (Preset)</option>
+                                <option value="assets/cappuccino.png">Hot Cappuccino (Preset)</option>
+                                <option value="assets/matcha_frappe.png">Matcha Frappe (Preset)</option>
+                                <option value="assets/croissant.png">Croissant Mentega (Preset)</option>
+                                <option value="custom">-- Unggah Foto Kustom --</option>
+                            </select>
+                            <input type="file" id="admin-product-image-file" accept="image/*" onchange="handleProductImageUpload(event)" style="display: none;">
+                            <button type="button" id="btn-admin-product-image-upload" onclick="document.getElementById('admin-product-image-file').click()" style="display: none; background: rgba(255,255,255,0.05); border: 1.5px solid var(--border-color); border-radius: 10px; color: var(--primary); padding: 8px 12px; font-size: 11px; font-weight: 700; cursor: pointer; outline: none;">
+                                Pilih Foto
+                            </button>
+                            
+                            <!-- Mini Preview Thumbnail -->
+                            <div id="admin-product-image-preview-box" style="width: 40px; height: 40px; border-radius: 8px; border: 1.5px solid var(--border-color); overflow: hidden; background: #251D18; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <img id="admin-product-image-preview" src="assets/es_kopi_susu.png" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        </div>
+                        <span id="admin-product-image-filename" style="font-size: 9px; color: var(--text-muted); display: none; margin-top: 2px;"></span>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 4px;">
+                        <label for="admin-product-price" style="font-size: 11px; font-weight: 700; color: var(--primary);">Harga Jual (Rp)</label>
+                        <input type="number" id="admin-product-price" min="0" placeholder="Misal: 25000" required style="width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 12px; box-sizing: border-box; outline: none;">
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; flex-direction: column; gap: 4px;">
+                        <label for="admin-product-cost" style="font-size: 11px; font-weight: 700; color: var(--primary);">Harga Modal (Rp)</label>
+                        <input type="number" id="admin-product-cost" min="0" placeholder="Misal: 10000" required style="width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 12px; box-sizing: border-box; outline: none;">
+                    </div>
+                </div>
+                
+                <div class="form-group" style="display: flex; flex-direction: column; gap: 4px;">
+                    <label for="admin-product-desc" style="font-size: 11px; font-weight: 700; color: var(--primary);">Deskripsi</label>
+                    <textarea id="admin-product-desc" rows="3" placeholder="Masukkan deskripsi detail mengenai menu ini..." required style="width: 100%; padding: 10px 14px; border-radius: 10px; border: 1.5px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 12px; box-sizing: border-box; outline: none; resize: none; font-family: inherit;"></textarea>
+                </div>
+                
+                <div style="margin-top: 10px; display: flex; gap: 10px;">
+                    <button type="button" onclick="closeProductModal()" style="flex: 1; background: transparent; border: 1.5px solid var(--border-color); color: var(--primary); padding: 12px; border-radius: 100px; font-weight: 700; cursor: pointer; font-size: 13px; outline: none; transition: background 0.2s;">Batal</button>
+                    <button type="submit" style="flex: 1.2; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 100px; font-weight: 700; cursor: pointer; font-size: 13px; outline: none; transition: opacity 0.2s;">Simpan Menu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+         POPUP MODAL 8: THERMAL PRINT RECEIPT MODAL (OVERLAY)
+         ========================================================== -->
+    <div id="thermal-receipt-modal" class="otp-overlay" style="z-index: 300;">
+        <div class="receipt-actions-no-print" style="position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 310;">
+            <button onclick="triggerPrintReceipt()" style="background: var(--accent-green); color: white; border: none; padding: 10px 20px; border-radius: 100px; font-weight: 700; cursor: pointer; font-size: 12px; box-shadow: 0 4px 15px rgba(46,204,113,0.3); display: flex; align-items: center; gap: 6px;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/>
+                </svg>
+                <span>Cetak Struk</span>
+            </button>
+            <button onclick="closeReceiptModal()" style="background: rgba(255, 255, 255, 0.9); border: 1.5px solid var(--border-color); color: var(--primary); padding: 10px 20px; border-radius: 100px; font-weight: 700; cursor: pointer; font-size: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                Tutup
+            </button>
+        </div>
+        
+        <!-- Thermal Receipt Sheet Paper inside a beautiful printable container -->
+        <div id="thermal-receipt-print-area" class="receipt-paper" style="background: #FFFFFF; color: #000000; font-family: 'Courier New', Courier, monospace; width: 300px; padding: 30px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); border-radius: 2px; position: relative; margin: auto; box-sizing: border-box; text-align: left;">
+            <div style="text-align: center; margin-bottom: 12px;">
+                <h2 id="receipt-shop-name" class="receipt-shop-name-fill" style="margin: 0; font-size: 18px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; font-family: inherit; color: #000000;">KOPI KITA</h2>
+                <p id="receipt-shop-subheader" style="margin: 3px 0 0 0; font-size: 10px; font-family: inherit; color: #333;">Premium Coffee Specialty</p>
+                <p style="margin: 2px 0 0 0; font-size: 9px; font-family: inherit; color: #555;">Jl. Coffee Avenue No. 28, Jakarta</p>
+            </div>
+            
+            <div style="border-top: 1px dashed #000; margin: 10px 0;"></div>
+            
+            <table style="width: 100%; font-size: 10.5px; font-family: inherit; line-height: 1.4; color: #000000;">
+                <tr>
+                    <td style="font-weight: 800;">No. Order:</td>
+                    <td id="receipt-order-id" style="text-align: right; font-weight: 800; font-family: monospace;">#KK-2832</td>
+                </tr>
+                <tr>
+                    <td>Tanggal:</td>
+                    <td id="receipt-order-date" style="text-align: right; font-family: monospace;">Hari Ini, 12:30</td>
+                </tr>
+                <tr>
+                    <td>Pemesan:</td>
+                    <td id="receipt-customer-name" style="text-align: right;">Sarah Melody</td>
+                </tr>
+                <tr>
+                    <td>Kasir/Barista:</td>
+                    <td id="receipt-barista-name" style="text-align: right;">Kasir Utama</td>
+                </tr>
+            </table>
+            
+            <div style="border-top: 1px dashed #000; margin: 10px 0;"></div>
+            
+            <!-- Items Table -->
+            <div id="receipt-items-list" style="font-size: 10.5px; font-family: inherit; color: #000000;">
+                <!-- Dynamically rendered items -->
+            </div>
+            
+            <div style="border-top: 1px dashed #000; margin: 10px 0;"></div>
+            
+            <table style="width: 100%; font-size: 11px; font-family: inherit; line-height: 1.4; color: #000000;">
+                <tr>
+                    <td>Subtotal</td>
+                    <td id="receipt-subtotal" style="text-align: right; font-family: monospace;">Rp 25.000</td>
+                </tr>
+                <tr style="display: none;">
+                    <td>Biaya Layanan</td>
+                    <td id="receipt-service-fee" style="text-align: right; font-family: monospace;">Rp 0</td>
+                </tr>
+                <tr>
+                    <td>Diskon Promo</td>
+                    <td id="receipt-discount" style="text-align: right; font-family: monospace;">-Rp 0</td>
+                </tr>
+                <tr style="font-weight: 800; font-size: 12.5px;">
+                    <td style="padding-top: 6px;">TOTAL BAYAR</td>
+                    <td id="receipt-total" style="text-align: right; padding-top: 6px; font-family: monospace;">Rp 30.000</td>
+                </tr>
+            </table>
+            
+            <div style="border-top: 1px dashed #000; margin: 12px 0 10px 0;"></div>
+            
+            <div style="text-align: center; font-size: 10px; font-family: inherit; margin-top: 8px; color: #000000;">
+                <p style="margin: 0; font-weight: bold; text-transform: uppercase;">Status: PAID / LUNAS</p>
+                <p id="receipt-payment-method" style="margin: 2px 0 6px 0; font-size: 9.5px;">Metode: QRIS (E-Wallet)</p>
+                <div style="border-top: 1px dotted #000; width: 80px; margin: 8px auto;"></div>
+                <p style="margin: 0; font-style: italic; line-height: 1.3;">Terima kasih atas kunjungan Anda di <span class="receipt-shop-name-fill">Kopi Kita</span>!</p>
+                <p style="margin: 4px 0 0 0; font-size: 8.5px; opacity: 0.8;">Aplikasi POS Kasir Premium Kopi Kita</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-notification" class="toast-notification">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" style="margin-right: 10px; flex-shrink: 0;"></svg>
+        <span id="toast-text">Notifikasi</span>
+    </div>
+
+    <!-- JS Code Link -->
+    <script src="app.js"></script>
+</body>
+</html>
