@@ -1,87 +1,61 @@
 # Kopi Kita
 
-Kopi Kita is a premium coffee ordering web application designed for coffee shops that want a clean, mobile-first digital ordering experience. The application presents a modern storefront where customers can browse coffee drinks and bakery items, add products to a cart, place orders, and complete a simple registration flow with OTP verification.
+Kopi Kita is a mobile-first premium coffee ordering web app demo. It includes product browsing, cart checkout, order history, configurable QRIS payment settings, cashier/admin flows, and optional OTP registration through a backend service.
 
-The project combines a responsive front-end interface with lightweight backend options for OTP delivery, making it suitable for small coffee businesses, portfolio demonstrations, and prototype deployments.
+## Features
 
-## Key Features
-
-- Mobile-first coffee shop interface with a smartphone-style preview layout
-- Product menu for coffee, drinks, and bakery items
-- Promotional banner slider for daily offers and featured products
-- Shopping cart and checkout flow
-- Customer registration with OTP verification
-- Local order history storage in the browser
-- Cashier/barista portal concept with PIN-based access
-- Store settings for shop name, cashier PIN, admin PIN, and QRIS image customization
-- Python backend server for static file hosting and OTP API endpoints
-- Optional Node.js/Express backend with Nodemailer support
-- Deployment guide for VPS, Nginx reverse proxy, and HTTPS setup
-
-## Application Overview
-
-Kopi Kita is built as a practical digital ordering prototype for a coffee brand. Customers can explore promotions, search menu items, manage their cart, and continue through a checkout experience. The app also includes business-side features such as order history, store configuration, and QRIS payment image customization.
-
-For account verification, the backend can send OTP codes through SMTP when production credentials are configured. In development mode, the backend can return simulated OTP responses, which makes local testing easier without requiring a real email setup.
+- Responsive coffee shop storefront with promo banners and product cards
+- Menu search and category filtering
+- Cart and checkout flow with local order history
+- Cashier/admin portal concept with configurable shop name, QRIS image, and PINs
+- Optional OTP API for registration using SMTP/Gmail App Password
+- Static frontend that can run directly on GitHub Pages
 
 ## Tech Stack
 
-### Frontend
-
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- LocalStorage for client-side state
-
-### Backend Options
-
-- Python HTTP server with OTP API support (`server.py`)
-- Node.js Express backend with Nodemailer (`server/server.js`)
+- Frontend: HTML, CSS, vanilla JavaScript
+- Static assets: PNG product images in `assets/`
+- Optional backend: Python `http.server` based API (`server.py`) or Node.js/Express API (`server/server.js`)
 
 ## Project Structure
 
-```text
-kopi-kita/
-├── index.html              # Main web application UI
-├── style.css               # Application styling and responsive layout
-├── app.js                  # Frontend logic, cart, settings, and interactions
-├── server.py               # Python server and OTP API implementation
-├── DEPLOYMENT.md           # Deployment guide for VPS/Nginx/HTTPS
-├── assets/                 # Product and promotional images
-└── server/                 # Optional Node.js backend
-    ├── package.json
-    ├── server.js
-    └── .env.example
-```
+- `index.html` — main application UI
+- `style.css` — responsive styling and app layout
+- `app.js` — app state, menu, cart, checkout, settings, and UI interactions
+- `assets/` — product and promo images
+- `server.py` — optional Python static/API server with OTP endpoints
+- `server/` — optional Node.js OTP backend
+- `DEPLOYMENT.md` — production deployment notes
 
-## Getting Started
+## Run Locally
 
-### Option 1: Run with Python
+Static preview:
 
 ```bash
+python3 -m http.server 8080
+```
+
+Open `http://localhost:8080`.
+
+Optional Python backend:
+
+```bash
+cp server/.env.example server/.env
 python3 server.py
 ```
 
-Then open:
-
-```text
-http://localhost:3000
-```
-
-### Option 2: Run the Node.js backend
+Optional Node.js backend:
 
 ```bash
 cd server
-npm install
 cp .env.example .env
+npm install
 npm start
 ```
 
-The Node.js backend starts on the configured `PORT` value, defaulting to `3000`.
-
 ## Environment Configuration
 
-Create a `.env` file based on `server/.env.example` when using real OTP email delivery.
+Do not commit real `.env` files. Use `server/.env.example` as a template:
 
 ```env
 PORT=3000
@@ -89,25 +63,15 @@ PRODUCTION=false
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-16-character-app-password
+SMTP_PASS=your-16-char-app-password
 ```
 
-Important: never commit real `.env` files or SMTP credentials to GitHub.
+For production OTP email delivery, enable Gmail 2-Step Verification, create an App Password, place it in `.env`, and set `PRODUCTION=true`.
 
-## Production Notes
+## GitHub Pages Demo
 
-For production deployment, set:
-
-```env
-PRODUCTION=true
-```
-
-When production mode is enabled, OTP simulation is disabled and real SMTP credentials are required. See `DEPLOYMENT.md` for a full VPS deployment flow using Nginx and Let's Encrypt SSL.
-
-## Repository Description
-
-A mobile-first premium coffee ordering web app with product browsing, cart checkout, OTP registration, cashier portal concept, and configurable QRIS payment settings.
+The frontend is static and deploys from the repository root using GitHub Pages.
 
 ## License
 
-This project is provided for portfolio, learning, and small-business prototype use.
+Demo project for presentation and customization.

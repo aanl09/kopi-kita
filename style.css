@@ -2255,17 +2255,22 @@ body {
 
 /* Hide desktop elements on mobile screens */
 @media (max-width: 991px) {
-    body {
-        height: 100vh;
-        height: 100dvh;
-        overflow: hidden;
-    }
-
-    .phone-frame {
+    html, body {
         height: 100%;
         height: 100dvh;
         overflow: hidden;
-        position: relative;
+        margin: 0;
+        padding: 0;
+    }
+
+    .phone-frame {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        overflow: hidden;
     }
 
     .screen-wrapper {
@@ -2279,6 +2284,17 @@ body {
     .screen {
         height: 100%;
         overflow: hidden;
+    }
+
+    .bottom-nav {
+        position: fixed !important;
+        bottom: 24px !important;
+        left: 20px !important;
+        right: 20px !important;
+        width: calc(100% - 40px) !important;
+        height: 72px !important;
+        box-sizing: border-box !important;
+        z-index: 9999 !important;
     }
 
     .scroll-container {
@@ -2318,10 +2334,11 @@ body {
 /* Adaptive mobile layout helper for small viewports */
 @media (max-width: 500px) {
     .bottom-nav {
-        bottom: 12px;
-        left: 12px;
-        right: 12px;
-        height: 64px;
+        bottom: 12px !important;
+        left: 12px !important;
+        right: 12px !important;
+        width: calc(100% - 24px) !important;
+        height: 64px !important;
     }
 }
 
@@ -3696,11 +3713,12 @@ body.logged-in .screen-wrapper[data-active-tab="admin"] .orders-screen {
 
     /* Penyesuaian bottom nav agar sangat pas */
     .bottom-nav {
-        left: 10px;
-        right: 10px;
-        bottom: 12px;
-        height: 64px;
-        border-radius: 18px;
+        left: 10px !important;
+        right: 10px !important;
+        width: calc(100% - 20px) !important;
+        bottom: 12px !important;
+        height: 64px !important;
+        border-radius: 18px !important;
     }
 
     .nav-item {
